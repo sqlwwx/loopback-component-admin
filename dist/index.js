@@ -91,10 +91,10 @@ module.exports = function(loopbackApplication, options) {
   options = defaults({}, options, {
     mountPath: '/admin'
   });
-  loopbackApplication.use(options.mountPath, routes(loopbackApplication, options));
-  loopbackApplication.set('loopback-component-admin', options);
   loopbackApplication.once('started', function() {
     var adminPath, baseUrl;
+    loopbackApplication.use(options.mountPath, routes(loopbackApplication, options));
+    loopbackApplication.set('loopback-component-admin', options);
     baseUrl = loopbackApplication.get('url').replace(/\/$/, '');
     adminPath = options.mountPath || options.route;
     return console.log('Browse your Admin UI at %s%s', baseUrl, adminPath);

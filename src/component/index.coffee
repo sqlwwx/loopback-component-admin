@@ -97,10 +97,10 @@ routes = (loopbackApplication, options) ->
 module.exports = (loopbackApplication, options) ->
   options = defaults {}, options, mountPath: '/admin'
 
-  loopbackApplication.use options.mountPath, routes(loopbackApplication, options)
-  loopbackApplication.set 'loopback-component-admin', options
-
   loopbackApplication.once 'started', ->
+    loopbackApplication.use options.mountPath, routes(loopbackApplication, options)
+    loopbackApplication.set 'loopback-component-admin', options
+
     baseUrl = loopbackApplication.get('url').replace /\/$/, ''
     adminPath = options.mountPath or options.route
 
